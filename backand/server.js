@@ -3,6 +3,7 @@ const app = express();
 const db = require('./data/db'); 
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const port = 3000;
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -27,7 +28,7 @@ app.get('/voitures/:id',(req,res)=>{
 });
 //detail les voitures par la marque
 app.get("/voitures/order-by-marque",(req,res)=>{
-    db.query('SELECT * FROM livres ORDER BY marque ',(err,results)=>{
+    db.query('SELECT * FROM voitures ORDER BY marque ',(err,results)=>{
         if(err){
             res.status(500).send(err)
         }
@@ -47,6 +48,6 @@ app.get("/voitures/order-by-status",(req,res)=>{
 
 
 
-app.listen(3000, () => {
-  console.log('Serveur démarré sur http://localhost:3000');
+app.listen(port, () => {
+  console.log(`Serveur démarré sur http://localhost:${port}`);
 });
