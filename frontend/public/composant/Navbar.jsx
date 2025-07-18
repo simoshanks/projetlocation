@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 function Navbar() {
     return (<div>
         <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -23,6 +24,9 @@ function Navbar() {
 
 
                     </ul>
+                    <NavLink to={'/login'}  className="btn btn-success">login</NavLink>
+                      
+                    
                 </div>
             </div>
         </nav>

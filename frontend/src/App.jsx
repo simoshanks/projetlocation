@@ -8,8 +8,11 @@ import Contact from '../public/pages/Contact'
 import Voitures from '../public/pages/Voitures'
 import Footer from '../public/composant/Footer'
 import Infovoiture from '../public/pages/Infovoiture'
+import Login from '../public/composant/login'
+import { useState } from 'react'
 
 function App() {
+  const[user,setUser]=useState(null)
 
 
   return (
@@ -23,6 +26,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/voitures" element={<Voitures />} />
         <Route path="/infovoiture/:id" element={<Infovoiture />} />
+        <Route path="/login" element={<Login setUser={setUser}/>} />
       </Routes>
        <Footer/>
 
