@@ -10,6 +10,11 @@ import Footer from '../public/composant/Footer'
 import Infovoiture from '../public/pages/Infovoiture'
 import Login from '../public/composant/login'
 import { useState } from 'react'
+import Admin from '../public/pages/Admin'
+import User from '../public/pages/User'
+import Nouvelvoiture from '../public/composant/Nouvelvoiture'
+import Modifiervoiture from '../public/composant/Modifiervoiture'
+
 
 function App() {
   const[user,setUser]=useState(null)
@@ -27,6 +32,10 @@ function App() {
         <Route path="/voitures" element={<Voitures />} />
         <Route path="/infovoiture/:id" element={<Infovoiture />} />
         <Route path="/login" element={<Login setUser={setUser}/>} />
+        <Route path="/Admin" element={<Admin />} />
+        <Route path="/user" element={<User />} />
+        <Route path="/nouvel-voiture" element={<Nouvelvoiture />} />
+        <Route path="/modifier/:id" element={<Modifiervoiture/>} />
       </Routes>
        <Footer/>
 

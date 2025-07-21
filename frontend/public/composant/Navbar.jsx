@@ -18,15 +18,15 @@ function Navbar() {
                         <li className="nav-item">
                             <a className="nav-link" href="/contact">contactez nous</a>
                         </li>
-                                                <li className="nav-item">
+                        <li className="nav-item">
                             <a className="nav-link" href="/apropos">A propos</a>
                         </li>
 
 
                     </ul>
-                    <NavLink to={'/login'}  className="btn btn-success">login</NavLink>
-                      
-                    
+                    <NavLink to={'/login'} className="btn btn-success">login</NavLink>
+
+
                 </div>
             </div>
         </nav>

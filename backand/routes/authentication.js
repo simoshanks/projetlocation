@@ -40,8 +40,18 @@ router.post('/login', (req, res) => {
         if (err) return res.status(500).json(err)
         const user = result[0]
         const isEqual = await bcrypt.compare(password, user.password)
-        res.send(isEqual)
+        if (!user || !isEqual) {
+            return res.status(401).json({ message: 'Email ou mot de passe incorrect' })
+        }
+        
+        res.json({
+            id: user.id,
+            name: user.name + ' ' + user.prenom,
+            role: user.role
+        })
     })
+    
+    
 })
 
 

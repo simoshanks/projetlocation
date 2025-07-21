@@ -17,9 +17,9 @@ function Login({setUser}) {
         }).then(res=>{
             setUser(res.data)
             if(res.data.role==='admin'){
-                Navigate('/admin')
+                navigate('/admin')
             }else{
-                Navigate('user')
+                navigate('/user')
             }
         }).catch(err=>{
           console.log(err);
