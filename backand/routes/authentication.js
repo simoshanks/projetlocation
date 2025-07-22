@@ -7,17 +7,17 @@ const bcrypt = require('bcrypt')
 
 //post users
 router.post('/register', async (req, res) => {
-    const { name, prenom, email, password, } = req.body;
+    const { name, prenom,tele, email, password, } = req.body;
 
-    if (!name || !prenom || !email || !password) {
+    if (!name || !prenom || !tele || !email || !password) {
         return res.status(400).json({ message: 'Champs manquants' });
 
     }
     const cryptpassword = await bcrypt.hash(password, 10)
     const role = 'client'
 
-    const sql = 'INSERT INTO users (name,prenom, email, password,role) VALUES (?, ?, ? ,? ,?)';
-    db.query(sql, [name, prenom, email, cryptpassword, role], (err, result) => {
+    const sql = 'INSERT INTO users (name,prenom,tele, email, password,role) VALUES (?, ?, ? ,? ,?,?)';
+    db.query(sql, [name, prenom,tele, email, cryptpassword, role], (err, result) => {
         if (err) return res.status(500).json({ message: 'Erreur serveur' });
 
         res.status(201).json({

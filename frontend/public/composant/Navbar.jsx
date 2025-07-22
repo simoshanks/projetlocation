@@ -10,13 +10,13 @@ function Navbar() {
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav">
                         <li className="nav-item">
-                            <a className="nav-link active" aria-current="page" href="/accueil">Accueil</a>
+                            <a className="nav-link" aria-current="page" href="/accueil">Accueil</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="/voitures">voitures</a>
+                            <a className="nav-link" href="/voitures">Voitures</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="/contact">contactez nous</a>
+                            <a className="nav-link" href="/contact">Contactez nous</a>
                         </li>
                         <li className="nav-item">
                             <a className="nav-link" href="/apropos">A propos</a>
@@ -24,7 +24,13 @@ function Navbar() {
 
 
                     </ul>
-                    <NavLink to={'/login'} className="btn btn-success">login</NavLink>
+                    <br/>
+                    <div className="d-flex justify-content-between">
+                        <NavLink to={'/login'} className="btn btn-success">se Connecter</NavLink>
+                        <NavLink to={'/new-compte'} className="btn btn-primary"> Créer un Compte </NavLink>
+
+                    </div>
+                    
 
 
                 </div>

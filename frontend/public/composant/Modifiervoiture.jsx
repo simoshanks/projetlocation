@@ -6,17 +6,17 @@ function Modifiervoiture() {
   const { id } = useParams();
   const navigate = useNavigate();
 
- const [voiture, setVoiture] = useState({
-  matricul: "",
-  marque: "",
-  prix: "",
-  img: "",
-  status: ""
-});
+  const [voiture, setVoiture] = useState({
+    matricul: "",
+    marque: "",
+    prix: "",
+    img: "",
+    status: ""
+  });
 
   useEffect(() => {
     axios.get(`http://localhost:3000/voitures/${id}`)
-      .then((res) => setVoiture(res.data))
+      .then((res) => setVoiture(res.data[0]))
       .catch((err) => console.log(err));
   }, [id]);
 
@@ -40,15 +40,15 @@ function Modifiervoiture() {
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label>Matricule</label>
-          <input type="text" name="matricul" className="form-control" value={voiture.matricul} onChange={handleChange} />
+          <input type="text" name="matricul" className="form-control" value={ voiture.matricul } onChange={handleChange} />
         </div>
         <div className="mb-3">
           <label>Marque</label>
-          <input type="text" name="marque" className="form-control" value={voiture.marque} onChange={handleChange} />
+          <input type="text" name="marque" className="form-control" value={ voiture.marque } onChange={handleChange} />
         </div>
         <div className="mb-3">
           <label>Prix</label>
-          <input type="number" name="prix" className="form-control" value={voiture.prix} onChange={handleChange} />
+          <input type="number" name="prix" className="form-control" value={ voiture.prix} onChange={handleChange} />
         </div>
         <div className="mb-3">
           <label>Image</label>

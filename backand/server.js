@@ -126,11 +126,11 @@ app.get('/users/:id',(req,res)=>{
 
 //modifiy le info de user
 app.put('/users/:id',async (req, res) => {
-  const { name, prenom, email,password } = req.body;
+  const { name, prenom,tele, email,password } = req.body;
   const { id } = req.params;
     const cryptpassword = await bcrypt.hash(password,10)
   const role='client'
-  db.query('UPDATE users SET name = ?, prenom = ?, email = ?, password = ?, role=?  WHERE id = ?', [name, prenom, email,cryptpassword,role, id], (err) => {
+  db.query('UPDATE users SET name = ?, prenom = ?, email = ?, tele = ?, password = ?, role=?  WHERE id = ?', [name, prenom, email,tele,cryptpassword,role, id], (err) => {
     if (err) throw err;
     res.json({
       message: 'user modify avec succès',
@@ -147,6 +147,20 @@ app.delete('/users/:id', (req, res) => {
     res.json({ message: 'users supprimé' });
   });
 });
+
+/////////////////////reservation///////////////////////
+
+//amenez toutes reservation
+app.get('/reservation', (req, res) => {
+  db.query('SELECT * FROM reservation', (err, results) => {
+    if (err) {
+      console.error('Erreur lors de la récupération des reservations :', err);
+      return res.status(500).json({ message: 'Erreur serveur' });
+    }
+    res.json(results);
+  });
+});
+
 
 
 

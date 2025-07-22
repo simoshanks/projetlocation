@@ -28,7 +28,7 @@ function Tablevoiture() {
     };
     return (
         <div>
-            <h1 className='text-center mt-4'>Voitures List</h1>
+            <h1 className='text-center mt-4'>List de voitures</h1>
             <div className="container">
                 <table className="table table-striped table-hover table-bordered mt-4 text-center">
                     <thead className="table-danger">
@@ -52,7 +52,7 @@ function Tablevoiture() {
                                 <td>{voiture.img}</td>
                                 <td>{voiture.status}</td>
                                 <td>
-                                    <NavLink to={`/modifier/:${voiture.id}`} className="btn btn-sm btn-outline-primary me-2">Modifier</NavLink>
+                                    <NavLink to={`/modifier/${voiture.id}`} className="btn btn-sm btn-outline-primary me-2">Modifier</NavLink>
                                     <button onClick={() => supprimer(voiture.id)} className="btn btn-sm btn-outline-danger" >Supprimer</button>
                                 </td>
                             </tr>

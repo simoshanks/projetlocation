@@ -14,6 +14,7 @@ import Admin from '../public/pages/Admin'
 import User from '../public/pages/User'
 import Nouvelvoiture from '../public/composant/Nouvelvoiture'
 import Modifiervoiture from '../public/composant/Modifiervoiture'
+import Nouvelutilisateur from '../public/composant/Nouvelutilisateur'
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
         <Route path="/user" element={<User />} />
         <Route path="/nouvel-voiture" element={<Nouvelvoiture />} />
         <Route path="/modifier/:id" element={<Modifiervoiture/>} />
+        <Route path="/new-compte" element={<Nouvelutilisateur/>} />
       </Routes>
        <Footer/>
 
