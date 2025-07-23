@@ -12,7 +12,7 @@ function Nouvelvoiture() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post("http://localhost:3000/addvoiture", {
+        axios.post("http://localhost:3000/voiture", {
             matricul,
             marque,
             prix,

@@ -8,17 +8,17 @@ function Tablevoiture() {
 
 
     useEffect(() => {
-        axios.get('http://localhost:3000/voitures')
+        axios.get('http://localhost:3000/voiture')
             .then(res => setVoitures(res.data))
             .catch(err => console.log(err))
     }, [])
     const supprimer = (id) => {
         if (window.confirm("Voulez-vous vraiment supprimer cette voiture ?")) {
-            axios.delete(`http://localhost:3000/voitures/${id}`)
+            axios.delete(`http://localhost:3000/voiture/${id}`)
                 .then(() => {
                     alert("Voiture supprimée");
 
-                    axios.get('http://localhost:3000/voitures')
+                    axios.get('http://localhost:3000/voiture')
                         .then(res => setVoitures(res.data))
                         .catch(err => console.log(err));
 

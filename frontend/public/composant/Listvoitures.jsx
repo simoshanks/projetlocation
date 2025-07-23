@@ -6,7 +6,7 @@ function Listvoitures() {
     const [voitures, setVoitures] = useState([])
 
     useEffect(() => {
-        axios.get('http://localhost:3000/voitures')
+        axios.get('http://localhost:3000/voiture')
             .then(res => setVoitures(res.data))
     }, [])
     return (

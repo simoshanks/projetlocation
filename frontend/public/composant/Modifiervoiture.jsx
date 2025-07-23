@@ -15,7 +15,7 @@ function Modifiervoiture() {
   });
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/voitures/${id}`)
+    axios.get(`http://localhost:3000/voiture/${id}`)
       .then((res) => setVoiture(res.data[0]))
       .catch((err) => console.log(err));
   }, [id]);
@@ -26,7 +26,7 @@ function Modifiervoiture() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.put(`http://localhost:3000/voitures/${id}`, voiture)
+    axios.put(`http://localhost:3000/voiture/${id}`, voiture)
       .then(() => {
         alert("Voiture modifiée");
         navigate("/admin");

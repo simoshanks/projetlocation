@@ -1,43 +1,62 @@
-import { NavLink } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+
 function Navbar() {
-    return (<div>
-        <nav className="navbar navbar-expand-lg bg-body-tertiary">
-            <div className="container-fluid">
-                <a className="navbar-brand" href="/accueil">Azicare</a>
-                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-                <div className="collapse navbar-collapse" id="navbarNav">
-                    <ul className="navbar-nav">
-                        <li className="nav-item">
-                            <a className="nav-link" aria-current="page" href="/accueil">Accueil</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="/voitures">Voitures</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="/contact">Contactez nous</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="/apropos">A propos</a>
-                        </li>
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    const connectedUser = JSON.parse(localStorage.getItem("user"));
+    setUser(connectedUser);
+  }, []);
 
-                    </ul>
-                    <br/>
-                    <div className="d-flex justify-content-between">
-                        <NavLink to={'/login'} className="btn btn-success">se Connecter</NavLink>
-                        <NavLink to={'/new-compte'} className="btn btn-primary"> Créer un Compte </NavLink>
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    setUser(null);
+    navigate("/login");
+  };
 
-                    </div>
-                    
+  return (
+    <nav className="navbar navbar-expand-lg bg-body-tertiary">
+      <div className="container-fluid">
+        <NavLink className="navbar-brand" to="/accueil">Azicare</NavLink>
+        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span className="navbar-toggler-icon"></span>
+        </button>
 
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/accueil">Accueil</NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/voitures">Voitures</NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/contact">Contactez-nous</NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/apropos">À propos</NavLink>
+            </li>
+          </ul>
 
-                </div>
-            </div>
-        </nav>
-
-    </div>)
-
+          <div className="d-flex">
+            {!user ? (
+              <>
+                <NavLink to="/login" className="btn btn-success me-2">Se connecter</NavLink>
+                <NavLink to="/new-compte" className="btn btn-primary">Créer un compte</NavLink>
+              </>
+            ) : (
+              <div className="d-flex align-items-center">
+                <span className="me-3 text-primary fw-bold">{user.prenom}</span>
+                <button onClick={handleLogout} className="btn btn-outline-danger">Déconnexion</button>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </nav>
+  );
 }
+
 export default Navbar;

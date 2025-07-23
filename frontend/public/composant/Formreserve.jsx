@@ -1,51 +1,100 @@
-function Formreserve() {
-    return (
-        <div>
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { NavLink } from "react-router-dom";
 
-            <button type="button" className="btn btn-outline-success w-25" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                reserve
-            </button>
+function Formreserve({ show, onClose, voitureid, user }) {
+  const [form, setForm] = useState({
+    userid: '',
+    voitureid: '',
+    date_debut: '',
+    date_fin: '',
+    statut: 'en attente'
+  });
 
+  useEffect(() => {
+    if (user) {
+      setForm(prev => ({ ...prev, userid: user.id }));
+    }
+  }, [user]);
 
-            <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div className="modal-dialog">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <h1 className="modal-title fs-5" id="exampleModalLabel">Entre votre information</h1>
-                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div className="modal-body">
-                            <form>
-                                <div className="m-3">
-                                    <label for="name" className="form-label">name</label>
-                                    <input type="text" className="form-control" id="name" />
-                                </div>
-                                <div className="m-3">
-                                    <label for="prenom" className="form-label">prenom</label>
-                                    <input type="text" className="form-control" id="prenom" />
-                                </div>
+  useEffect(() => {
+    setForm(prev => ({ ...prev, voitureid }));
+  }, [voitureid]);
 
-                                <div className="mb-3">
-                                    <label for="exampleInputEmail1" className="form-label">Email address</label>
-                                    <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
-                                    <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
-                                </div>
-                                <div className="mb-3">
-                                    <label for="exampleInputPassword1" className="form-label">Password</label>
-                                    <input type="password" className="form-control" id="exampleInputPassword1" />
-                                </div>
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
 
-                                <button type="submit" className="btn btn-primary">Submit</button>
-                            </form>
-                        </div>
-                        <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                            <button type="button" className="btn btn-primary">Reserver</button>
-                        </div>
-                    </div>
-                </div>
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    console.log("🚀 Payload envoyé:", form); // للتأكد من صحة البيانات المرسلة
+
+    axios.post('http://localhost:3000/reservation', form)
+      .then(() => {
+        alert("Réservation ajoutée avec succès !");
+        onClose();
+      })
+      .catch(err => {
+        console.error("❌ Erreur réservation:", err);
+        alert("Échec de la réservation.");
+      });
+  };
+
+  if (!show) return null;
+
+  return (
+    <div className="modal show d-block" tabIndex="-1" style={{ backgroundColor: "rgba(0,0,0,0.5)" }}>
+      <div className="modal-dialog">
+        <div className="modal-content p-3">
+          <div className="modal-header">
+            <h5 className="modal-title">Réserver la voiture</h5>
+            <button type="button" className="btn-close" onClick={onClose}></button>
+          </div>
+
+          {!user && (
+            <div className="alert alert-warning text-center">
+              Vous devez <NavLink to="/login">vous connecter</NavLink> pour réserver.
             </div>
+          )}
+
+          {user && (
+            <form onSubmit={handleSubmit}>
+              <div className="modal-body">
+                <div className="mb-3">
+                  <label>Date début</label>
+                  <input
+                    type="date"
+                    name="date_debut"
+                    className="form-control"
+                    value={form.date_debut}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+
+                <div className="mb-3">
+                  <label>Date fin</label>
+                  <input
+                    type="date"
+                    name="date_fin"
+                    className="form-control"
+                    value={form.date_fin}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+              </div>
+              <div className="modal-footer">
+                <button type="submit" className="btn btn-success">Réserver</button>
+                <button type="button" className="btn btn-secondary" onClick={onClose}>Annuler</button>
+              </div>
+            </form>
+          )}
         </div>
-    )
+      </div>
+    </div>
+  );
 }
+
 export default Formreserve;

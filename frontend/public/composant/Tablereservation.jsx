@@ -23,7 +23,7 @@ function Tablereservation() {
                         <th>date_debt</th>
                         <th>date_fin</th>
                         <th>statut</th>
-                        <th>criation de reservation</th>
+                       
                         
                     </tr>
                 </thead>
@@ -32,11 +32,11 @@ function Tablereservation() {
                         <tr key={reserv.id}>
                             <td>{index + 1}</td>
                             <td>{reserv.userid}</td>
-                            <td>{reserv.Voitureid}</td>
+                            <td>{reserv.voitureid}</td>
                             <td>{reserv.date_debut} </td>
                             <td>{reserv.date_fin}</td>
                             <td>{reserv.statut}</td>
-                            <td>{reserv.created_at}</td>
+                           
 
 
                         </tr>

@@ -38,7 +38,7 @@ function Tableusers() {
                         <th>prenom</th>
                         <th>telephon</th>
                         <th>email</th>
-                        <th>password</th>
+                       
                         <th>role</th>
                         <th>Actions</th>
                     </tr>
@@ -51,7 +51,7 @@ function Tableusers() {
                             <td>{user.prenom}</td>
                             <td>{user.tele} </td>
                             <td>{user.email}</td>
-                            <td>{user.password}</td>
+                            
                             <td>{user.role}</td>
                             <td>
                                 <button onClick={() => supprimer(user.id)} className="btn btn-sm btn-outline-danger">supprimer</button>
