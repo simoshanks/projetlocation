@@ -16,6 +16,7 @@ app.use('/auth',authRoutes)
 app.use('/voiture',voituresRoutes)
 app.use('/users',usersRoutes)
 app.use('/reservation',reservationRoutes)
+app.use("/uploads", express.static("uploads"));
 
 
 app.listen(port, () => {

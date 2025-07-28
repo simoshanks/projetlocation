@@ -59,8 +59,8 @@ function Modifiervoiture() {
           <select name="status" className="form-control" value={voiture.status} onChange={handleChange}>
             <option value="">-- Choisir --</option>
             <option value="disponible">Disponible</option>
-            <option value="réservée">Réservée</option>
-            <option value="hors service">Hors service</option>
+            <option value="loué">Loué</option>
+            <option value="en panne">En panne</option>
           </select>
         </div>
         <button type="submit" className="btn btn-success">Modifier</button>

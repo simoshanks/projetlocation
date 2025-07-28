@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const db = require('../data/db')
+const bcrypt = require('bcrypt');
 
 
 // //amenez toutes users
@@ -26,20 +27,38 @@ router.get('/:id',(req,res)=>{
 //post users
 
 //modifiy le info de user
-router.put('/:id',async (req, res) => {
-  const { name, prenom,tele, email,password } = req.body;
-  const { id } = req.params;
-    const cryptpassword = await bcrypt.hash(password,10)
-  const role='client'
-  db.query('UPDATE users SET name = ?, prenom = ?, email = ?, tele = ?, password = ?, role=?  WHERE id = ?', [name, prenom, email,tele,cryptpassword,role, id], (err) => {
-    if (err) throw err;
-    res.json({
-      message: 'user modify avec succès',
+router.put('/:id', async (req, res) => {
+  const userId = req.params.id;
+  const { name, prenom, tele, email, password } = req.body;
 
-       });
-  });
+  if (!name || !prenom || !tele || !email) {
+    return res.status(400).json({ message: 'Champs manquants' });
+  }
+
+  let sql, values;
+
+  try {
+    if (password) {
+      const hashedPassword = await bcrypt.hash(password, 10);
+      sql = `UPDATE users SET name = ?, prenom = ?, tele = ?, email = ?, password = ? WHERE id = ?`;
+      values = [name, prenom, tele, email, hashedPassword, userId];
+    } else {
+      sql = `UPDATE users SET name = ?, prenom = ?, tele = ?, email = ? WHERE id = ?`;
+      values = [name, prenom, tele, email, userId];
+    }
+
+    db.query(sql, values, (err, result) => {
+      if (err) {
+        console.error("Erreur lors de la mise à jour:", err);
+        return res.status(500).json({ message: "Erreur serveur" });
+      }
+      res.status(200).json({ message: "Utilisateur mis à jour avec succès" });
+    });
+  } catch (err) {
+    console.error("Erreur interne:", err);
+    res.status(500).json({ message: "Erreur serveur" });
+  }
 });
-
 // supprimer user
 router.delete('/:id', (req, res) => {
   const { id } = req.params;

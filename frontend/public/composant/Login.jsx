@@ -31,7 +31,7 @@ function Login({ setUser }) {
                 if (user.role === 'admin') {
                     navigate('/admin');
                 } else {
-                    navigate('/accueil');
+                    navigate('/voitures');
                 }
                
                 window.location.reload();

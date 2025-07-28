@@ -16,10 +16,12 @@ import Nouvelvoiture from '../public/composant/Nouvelvoiture'
 import Modifiervoiture from '../public/composant/Modifiervoiture'
 import Nouvelutilisateur from '../public/composant/Nouvelutilisateur'
 import Listvoitures from '../public/composant/Listvoitures'
+import Userprofil from '../public/pages/Userprofil'
 
 
 function App() {
   const[user,setUser]=useState(null)
+ 
 
 
   return (
@@ -35,6 +37,7 @@ function App() {
         <Route path="/infovoiture/:id" element={<Infovoiture user={user}/>} />
         <Route path="/login" element={<Login setUser={setUser}/>} />
         <Route path="/Admin" element={<Admin />} />
+        <Route path="/userprofil" element={<Userprofil />} />
        
         <Route path="/nouvel-voiture" element={<Nouvelvoiture />} />
         <Route path="/modifier/:id" element={<Modifiervoiture/>} />

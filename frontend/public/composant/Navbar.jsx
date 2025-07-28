@@ -17,7 +17,10 @@ function Navbar() {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary">
+    <nav className="navbar navbar-expand-lg " style={{
+      backgroundColor: '#8a817c',
+      color: '#f4f3ee'
+    }}>
       <div className="container-fluid">
         <NavLink className="navbar-brand" to="/accueil">Azicare</NavLink>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -43,13 +46,18 @@ function Navbar() {
           <div className="d-flex">
             {!user ? (
               <>
-                <NavLink to="/login" className="btn btn-success me-2">Se connecter</NavLink>
-                <NavLink to="/new-compte" className="btn btn-primary">Créer un compte</NavLink>
+                <NavLink to="/login" className="btn btn-light text-dark me-2">Se connecter</NavLink>
+                <NavLink to="/new-compte" className="btn btn-light text-dark">Créer un compte</NavLink>
               </>
             ) : (
               <div className="d-flex align-items-center">
-                <span className="me-3 text-primary fw-bold">{user.prenom}</span>
-                <button onClick={handleLogout} className="btn btn-outline-danger">Déconnexion</button>
+                <NavLink
+                  to={user.role === "admin" ? "/admin" : "/userprofil"}
+                  className="me-3 text-light fw-bold"
+                >
+                  {user.prenom}
+                </NavLink>
+                <button onClick={handleLogout} className="btn btn-outline-light">Déconnexion</button>
               </div>
             )}
           </div>

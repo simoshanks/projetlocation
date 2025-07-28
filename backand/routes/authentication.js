@@ -48,6 +48,8 @@ router.post('/login', (req, res) => {
             id: user.id,
             name: user.name ,
             prenom: user.prenom,
+            tele: user.tele,
+            email: user.email,
             role: user.role
         })
     })
