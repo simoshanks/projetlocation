@@ -10,13 +10,22 @@ function Modifiervoiture() {
     matricul: "",
     marque: "",
     prix: "",
-    img: "",
-    status: ""
+    status: "",
+    img: null,
   });
 
   useEffect(() => {
     axios.get(`http://localhost:3000/voiture/${id}`)
-      .then((res) => setVoiture(res.data[0]))
+      .then((res) => {
+        const car = res.data[0];
+        setVoiture({
+          matricul: car.matricul,
+          marque: car.marque,
+          prix: car.prix,
+          status: car.status || "",
+          img: car.img
+        });
+      })
       .catch((err) => console.log(err));
   }, [id]);
 
@@ -24,47 +33,127 @@ function Modifiervoiture() {
     setVoiture({ ...voiture, [e.target.name]: e.target.value });
   };
 
+  const handleImageChange = (e) => {
+    setVoiture({ ...voiture, img: e.target.files[0] });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.put(`http://localhost:3000/voiture/${id}`, voiture)
+    const formData = new FormData();
+    formData.append("matricul", voiture.matricul);
+    formData.append("marque", voiture.marque);
+    formData.append("prix", voiture.prix);
+    formData.append("status", voiture.status);
+    formData.append("img", voiture.img);
+
+    axios.put(`http://localhost:3000/voiture/${id}`, formData)
       .then(() => {
-        alert("Voiture modifiée");
+        alert("Voiture modifiée avec succès");
         navigate("/admin");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.error("Erreur modification :", err);
+        alert("Une erreur s'est produite");
+      });
   };
 
   return (
-    <div className="container mt-4">
-      <h2>Modifier Voiture</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label>Matricule</label>
-          <input type="text" name="matricul" className="form-control" value={ voiture.matricul } onChange={handleChange} />
-        </div>
-        <div className="mb-3">
-          <label>Marque</label>
-          <input type="text" name="marque" className="form-control" value={ voiture.marque } onChange={handleChange} />
-        </div>
-        <div className="mb-3">
-          <label>Prix</label>
-          <input type="number" name="prix" className="form-control" value={ voiture.prix} onChange={handleChange} />
-        </div>
-        <div className="mb-3">
-          <label>Image</label>
-          <input type="text" name="img" className="form-control" value={voiture.img} onChange={handleChange} />
-        </div>
-        <div className="mb-3">
-          <label>Status</label>
-          <select name="status" className="form-control" value={voiture.status} onChange={handleChange}>
-            <option value="">-- Choisir --</option>
-            <option value="disponible">Disponible</option>
-            <option value="loué">Loué</option>
-            <option value="en panne">En panne</option>
-          </select>
-        </div>
-        <button type="submit" className="btn btn-success">Modifier</button>
-      </form>
+    <div style={{ backgroundColor: "#bcb8b1", minHeight: "100vh", paddingTop: "50px" }}>
+      <div className="container py-5">
+        <h2 className="text-center mb-4" style={{
+          color: "#4e4e4e",
+          fontWeight: "bold",
+          textShadow: "1px 1px 2px rgba(0,0,0,0.1)"
+        }}>
+          Modifier une voiture
+        </h2>
+
+        <form
+          onSubmit={handleSubmit}
+          className="p-4 border rounded shadow-sm bg-light"
+        >
+          <div className="mb-3">
+            <label className="form-label fw-bold">Matricule</label>
+            <input
+              type="text"
+              name="matricul"
+              className="form-control"
+              value={voiture.matricul}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="mb-3">
+            <label className="form-label fw-bold">Marque</label>
+            <input
+              type="text"
+              name="marque"
+              className="form-control"
+              value={voiture.marque}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="mb-3">
+            <label className="form-label fw-bold">Prix (DH)</label>
+            <input
+              type="number"
+              name="prix"
+              className="form-control"
+              value={voiture.prix}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="mb-3">
+            <label className="form-label fw-bold">Statut</label>
+            <select
+              name="status"
+              className="form-select"
+              value={voiture.status}
+              onChange={handleChange}
+              required
+            >
+              <option value="">-- Choisir --</option>
+              <option value="disponible">Disponible</option>
+              <option value="loué">Loué</option>
+              <option value="en panne">En panne</option>
+            </select>
+          </div>
+
+          <div className="mb-3">
+            <label className="form-label fw-bold">Image</label>
+            <input
+              type="file"
+              name="img"
+              className="form-control"
+              onChange={handleImageChange}
+              accept="image/*"
+            />
+          </div>
+
+          {voiture.img && typeof voiture.img === "string" && (
+            <div className="mb-3 text-center">
+              <img
+                src={`http://localhost:3000/uploads/${voiture.img}`}
+                alt="voiture"
+                style={{
+                  maxHeight: "150px",
+                  borderRadius: "8px",
+                  boxShadow: "0 2px 6px rgba(0, 0, 0, 0.2)"
+                }}
+              />
+            </div>
+          )}
+
+          <button type="submit" className="btn btn-dark w-100">
+            Modifier
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

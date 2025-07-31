@@ -26,10 +26,14 @@ function Tablereservation() {
 
     return (
         <div>
-            <h1 className="text-center">Liste de Reservation</h1>
+            
             <div className="container">
+                <h2 className="text-center mb-4" style={{ color: '#4e4e4e', fontWeight: 'bold' }}>
+                    Liste des Reservations
+                    
+                </h2>
                 <table className="table table-striped table-hover table-bordered mt-4 text-center">
-                    <thead className="table-danger">
+                    <thead className="table-dark">
                         <tr>
                             <th>#</th>
                             <th>Utilisateur</th>

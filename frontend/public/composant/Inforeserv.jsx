@@ -44,7 +44,7 @@ function Inforeserv() {
 
     return (
         <div className="container mt-5">
-            <h2 className="text-center text-primary">Informations de réservation</h2>
+            <h2 className="text-center ">Informations de réservation</h2>
 
             {reservations.length === 0 ? (
                 <p>Aucune réservation trouvée.</p>
@@ -72,10 +72,10 @@ function Inforeserv() {
                                 <td>{resv.statut}</td>
                                 <td>
                                     <button
-                                        className="btn btn-danger btn-sm"
+                                        className="btn btn-dark btn-sm"
                                         onClick={() => handleDelete(resv.id)}
                                     >
-                                        anuller
+                                        Annulation
                                     </button>
                                 </td>
                             </tr>

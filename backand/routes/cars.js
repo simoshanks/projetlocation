@@ -26,6 +26,7 @@ router.get('/', (req, res) => {
     res.json(results);
   });
 });
+
 //amenez la voiture par id
 router.get('/:id', (req, res) => {
   const id = req.params.id;
@@ -70,18 +71,23 @@ router.post("/upload", upload.single("image"), (req, res) => {
 });
 
 //modifiy le info de la voiture
-router.put('/:id', (req, res) => {
-  const { matricul, marque, prix, img, status } = req.body;
+router.put('/:id', upload.single('img'), (req, res) => {
   const { id } = req.params;
-  db.query('UPDATE voitures SET matricul = ?, marque = ?, prix = ?, img = ? , status= ? WHERE id = ?', [matricul, marque, prix, img, status, id], (err) => {
-    if (err) throw err;
-    res.json({
-      message: 'la vouture modify avec succès',
-      id,
-      matricul,
-      marque,
-      prix
-    });
+  const { matricul, marque, prix, status } = req.body;
+  const img = req.file ? req.file.filename : req.body.img; // إذا لم تُرسل صورة جديدة، نحتفظ بالقديمة
+
+  const sql = `
+    UPDATE voitures 
+    SET matricul = ?, marque = ?, prix = ?, status = ?, img = ? 
+    WHERE id = ?
+  `;
+
+  db.query(sql, [matricul, marque, prix, status, img, id], (err, result) => {
+    if (err) {
+      console.error("Erreur SQL:", err);
+      return res.status(500).json({ error: "Erreur serveur" });
+    }
+    res.json({ message: "Voiture modifiée avec succès" });
   });
 });
 // supprimer la voiture

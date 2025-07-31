@@ -28,10 +28,13 @@ function Tablevoiture() {
     };
     return (
         <div>
-            <h1 className='text-center mt-4'>List de voitures</h1>
+
             <div className="container">
+                <h2 className="text-center mb-4" style={{ color: '#4e4e4e', fontWeight: 'bold' }}>
+                    List des voitures
+                </h2>
                 <table className="table table-striped table-hover table-bordered mt-4 text-center">
-                    <thead className="table-danger">
+                    <thead className="table-dark">
                         <tr>
                             <th>#</th>
                             <th>Matricule</th>
@@ -52,8 +55,22 @@ function Tablevoiture() {
                                 <td>{voiture.img}</td>
                                 <td>{voiture.status}</td>
                                 <td>
-                                    <NavLink to={`/modifier/${voiture.id}`} className="btn btn-sm btn-outline-primary me-2">Modifier</NavLink>
-                                    <button onClick={() => supprimer(voiture.id)} className="btn btn-sm btn-outline-danger" >Supprimer</button>
+                                    <div className="d-flex justify-content-center gap-2">
+                                        <NavLink
+                                            to={`/modifier/${voiture.id}`}
+                                            className="btn btn-outline-success btn-sm shadow-sm"
+                                        >
+                                            Modifier
+                                        </NavLink>
+
+                                        <button
+                                            onClick={() => supprimer(voiture.id)}
+                                            className="btn btn-outline-danger btn-sm shadow-sm"
+                                        >
+                                            Supprimer
+                                        </button>
+                                    </div>
+
                                 </td>
                             </tr>
                         ))}

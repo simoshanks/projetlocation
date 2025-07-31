@@ -51,12 +51,15 @@ function Navbar() {
               </>
             ) : (
               <div className="d-flex align-items-center">
-                <NavLink
-                  to={user.role === "admin" ? "/admin" : "/userprofil"}
-                  className="me-3 text-light fw-bold"
-                >
-                  {user.prenom}
-                </NavLink>
+                <div className="me-3 text-light fw-bold d-flex flex-column align-items-center" style={{ fontSize: "12px" }}>
+                  <i className="bi bi-person-circle" style={{ fontSize: "2rem" }}></i>
+                  <NavLink
+                    to={user.role === "admin" ? "/admin" : "/userprofil"}
+                    className="text-light text-decoration-none mt-1"
+                  >
+                    {user.prenom}
+                  </NavLink>
+                </div>
                 <button onClick={handleLogout} className="btn btn-outline-light">Déconnexion</button>
               </div>
             )}

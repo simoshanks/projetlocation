@@ -50,7 +50,7 @@ function Nouvelvoiture() {
 
   return (
 <div className="container mt-5" style={{ maxWidth: '600px' }}>
-  <h1 className="text-success text-center mb-4">Nouvelle voiture</h1>
+  <h1 className=" text-center mb-4">Nouvelle voiture</h1>
 
   {message && <div className="alert alert-success">{message}</div>}
   {error && <div className="alert alert-danger">{error}</div>}
@@ -114,7 +114,7 @@ function Nouvelvoiture() {
       </div>
     )}
 
-    <button type="submit" className="btn btn-success w-100">
+    <button type="submit" className="btn  w-100" style={{ backgroundColor: '#8a817c',color:'white'}} >
       Ajouter la voiture
     </button>
   </form>

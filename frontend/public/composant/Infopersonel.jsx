@@ -63,7 +63,7 @@ const [user, setUser] = useState(null);
   }
     return (<div className="container mt-5">
         <h1 className="text-center ">Votre profil</h1>
-        <h2 className="text-center text-primary">Information personel</h2>
+        <h2 className="text-center ">Information personel</h2>
         {message && <div className="alert alert-info">{message}</div>}
         <form onSubmit={handleSubmit}>
             {/* الحقول العادية */}
@@ -97,7 +97,7 @@ const [user, setUser] = useState(null);
                 </div>
             )}
 
-            <button type="submit" className="btn btn-primary">Mettre à jour</button>
+            <button type="submit" className="btn btn-success">Mettre à jour</button>
         </form>
     </div>)
 }
