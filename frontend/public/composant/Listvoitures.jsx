@@ -1,20 +1,23 @@
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import axios from 'axios';
 
 function Listvoitures() {
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const searchTerm = queryParams.get('search') || "";
+
     const [voitures, setVoitures] = useState([]);
     const [sortBy, setSortBy] = useState("");
 
     useEffect(() => {
-        axios.get('http://localhost:3000/voiture')
+        const url = `http://localhost:3000/voiture?search=${encodeURIComponent(searchTerm)}`;
+        axios.get(url)
             .then(res => setVoitures(res.data))
             .catch(err => console.error(err));
-    }, []);
+    }, [searchTerm]);
 
     const sortedVoitures = () => {
-        if (!sortBy) return voitures;
-
         let sorted = [...voitures];
         if (sortBy === "marque") {
             sorted.sort((a, b) => a.marque.localeCompare(b.marque));
@@ -23,12 +26,11 @@ function Listvoitures() {
         } else if (sortBy === "status") {
             sorted.sort((a, b) => a.status.localeCompare(b.status));
         }
-
         return sorted;
     };
 
     return (
-        <div style={{ backgroundColor: '#bcb8b1', minHeight: '100vh', paddingTop: '30px', paddingBottom: '30px' }}>
+        <div style={{  minHeight: '100vh', paddingTop: '30px', paddingBottom: '30px' }}>
             <div className="container">
                 <h1 className='text-center mb-4 text-dark'>Liste des Voitures</h1>
 
@@ -38,7 +40,7 @@ function Listvoitures() {
                         value={sortBy}
                         onChange={(e) => setSortBy(e.target.value)}
                         style={{
-                            backgroundColor: '#8a817c',  // نفس لون الـ navbar/footer
+                            backgroundColor: '#3b4a6b',
                             color: '#ffffff',
                             border: 'none',
                             borderRadius: '8px',
@@ -57,31 +59,35 @@ function Listvoitures() {
                 </div>
 
                 <div className='row'>
-                    {sortedVoitures().map((voiture) => (
-                        <div key={voiture.id} className='col-md-4 mb-4'>
-                            <div className="card shadow h-100" style={{ backgroundColor: '#8a817c', color: '#f4f3ee' }}>
-                                {voiture.img && (
-                                    <img
-                                        src={`http://localhost:3000/uploads/${voiture.img}`}
-                                        alt="voiture"
-                                        className="card-img-top"
-                                        style={{ height: "200px", objectFit: "cover" }}
-                                    />
-                                )}
-                                <div className="card-body d-flex flex-column">
-                                    <h5 className="card-title">{voiture.marque}</h5>
-                                    <p className="card-text"><strong>Matricule:</strong> {voiture.matricul}</p>
-                                    <p className="card-text"><strong>Prix:</strong> {voiture.prix} DH</p>
-                                    <p className="card-text"><strong>Status:</strong> {voiture.status}</p>
-                                    <div className="mt-auto">
-                                        <NavLink to={`/infovoiture/${voiture.id}`} className='btn btn-light w-100'>
-                                            Voir Détails
-                                        </NavLink>
+                    {sortedVoitures().length > 0 ? (
+                        sortedVoitures().map((voiture) => (
+                            <div key={voiture.id} className='col-md-4 mb-4'>
+                                <div className="card shadow h-100" style={{ backgroundColor: '#3b4a6b', color: '#f4f3ee' }}>
+                                    {voiture.img && (
+                                        <img
+                                            src={`http://localhost:3000/uploads/${voiture.img}`}
+                                            alt="voiture"
+                                            className="card-img-top"
+                                            style={{ height: "200px", objectFit: "cover" }}
+                                        />
+                                    )}
+                                    <div className="card-body d-flex flex-column">
+                                        <h5 className="card-title">{voiture.marque}</h5>
+                                        <p className="card-text"><strong>Matricule:</strong> {voiture.matricul}</p>
+                                        <p className="card-text"><strong>Prix:</strong> {voiture.prix} DH</p>
+                                        <p className="card-text"><strong>Status:</strong> {voiture.status}</p>
+                                        <div className="mt-auto">
+                                            <NavLink to={`/infovoiture/${voiture.id}`} className='btn btn-light w-100'>
+                                                Voir Détails
+                                            </NavLink>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    ))}
+                        ))
+                    ) : (
+                        <div className="text-center text-danger fw-bold">Aucune voiture trouvée.</div>
+                    )}
                 </div>
             </div>
         </div>

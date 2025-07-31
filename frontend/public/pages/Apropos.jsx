@@ -1,6 +1,6 @@
 function Apropos() {
   return (
-    <div style={{ backgroundColor: '#bcb8b1', minHeight: '100vh', paddingTop: '50px' }}>
+    <div style={{  minHeight: '100vh', paddingTop: '50px' }}>
       <div className="container py-5">
         <h1
           className="text-center mb-5"

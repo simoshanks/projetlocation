@@ -58,7 +58,7 @@ function Modifiervoiture() {
   };
 
   return (
-    <div style={{ backgroundColor: "#bcb8b1", minHeight: "100vh", paddingTop: "50px" }}>
+    <div style={{  minHeight: "100vh", paddingTop: "50px" }}>
       <div className="container py-5">
         <h2 className="text-center mb-4" style={{
           color: "#4e4e4e",

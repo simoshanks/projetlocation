@@ -18,7 +18,18 @@ const upload = multer({ storage: storage });
 
 //amenez toutes les voitures
 router.get('/', (req, res) => {
-  db.query('SELECT * FROM voitures', (err, results) => {
+  const search = req.query.search;
+
+  let sql = 'SELECT * FROM voitures';
+  let values = [];
+
+  if (search && search.trim() !== "") {
+    sql += ' WHERE marque LIKE ? OR matricul LIKE ? OR status LIKE ?';
+    const term = `%${search.trim()}%`;
+    values = [term, term, term];
+  }
+
+  db.query(sql, values, (err, results) => {
     if (err) {
       console.error('Erreur lors de la récupération des voitures :', err);
       return res.status(500).json({ message: 'Erreur serveur' });
@@ -26,7 +37,6 @@ router.get('/', (req, res) => {
     res.json(results);
   });
 });
-
 //amenez la voiture par id
 router.get('/:id', (req, res) => {
   const id = req.params.id;
@@ -98,6 +108,8 @@ router.delete('/:id', (req, res) => {
     res.json({ message: 'la voiture supprimé' });
   });
 });
+
+
 
 
 

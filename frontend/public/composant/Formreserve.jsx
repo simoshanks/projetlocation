@@ -34,7 +34,7 @@ function Formreserve({ show, onClose, voitureid, user }) {
         onClose();
       })
       .catch(err => {
-        console.error("❌ Erreur réservation:", err);
+        console.error(" Erreur réservation:", err);
         alert("Échec de la réservation.");
       });
   };
@@ -44,14 +44,24 @@ function Formreserve({ show, onClose, voitureid, user }) {
   return (
     <div className="modal show d-block" tabIndex="-1" style={{ backgroundColor: "rgba(0,0,0,0.6)" }}>
       <div className="modal-dialog">
-        <div className="modal-content" style={{ backgroundColor: '#8a817c', color: '#f4f3ee' }}>
+        <div className="modal-content" style={{
+          backgroundColor: '#3b4a6b', 
+          color: '#f4f3ee',          
+          boxShadow: '0 4px 15px rgba(0, 0, 0, 0.3)'
+        }}>
           <div className="modal-header border-0">
             <h5 className="modal-title">Réserver la voiture</h5>
-            <button type="button" className="btn-close" onClick={onClose} style={{ filter: "invert(1)" }}></button>
+            <button
+              type="button"
+              className="btn-close"
+              onClick={onClose}
+              style={{ filter: "invert(1)", opacity: 0.8 }}
+              aria-label="Close"
+            ></button>
           </div>
 
           {!user && (
-            <div className="alert alert-warning text-center">
+            <div className="alert alert-warning text-center" style={{ backgroundColor: '#d9cbbf', color: '#5a3e1b' }}>
               Vous devez <NavLink to="/login" className="fw-bold text-decoration-underline">vous connecter</NavLink> pour réserver.
             </div>
           )}
@@ -68,6 +78,7 @@ function Formreserve({ show, onClose, voitureid, user }) {
                     value={form.date_debut}
                     onChange={handleChange}
                     required
+                    style={{ backgroundColor: '#d9e6f2', border: 'none' }}
                   />
                 </div>
 
@@ -80,6 +91,7 @@ function Formreserve({ show, onClose, voitureid, user }) {
                     value={form.date_fin}
                     onChange={handleChange}
                     required
+                    style={{ backgroundColor: '#d9e6f2', border: 'none' }}
                   />
                 </div>
               </div>

@@ -2,7 +2,7 @@ function Footer() {
   return (
     <footer
       style={{
-        background: 'linear-gradient(90deg, #7f7a72, #8a817c)',
+        background: 'linear-gradient(90deg, #3b4a6b, #556787)', // أزرق غامق متدرج
         color: '#f4f3ee',
         fontSize: '14px',
       }}
@@ -11,42 +11,20 @@ function Footer() {
       <div className="container">
         <p className="mb-2">&copy; 2025 Azicare. Tous droits réservés.</p>
         <div>
-          <a
-            href="https://www.facebook.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ color: '#f4f3ee', margin: '0 10px', fontSize: '20px' }}
-            aria-label="Facebook"
-          >
-            <i className="bi bi-facebook"></i>
-          </a>
-          <a
-            href="https://twitter.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ color: '#f4f3ee', margin: '0 10px', fontSize: '20px' }}
-            aria-label="Twitter"
-          >
-            <i className="bi bi-twitter"></i>
-          </a>
-          <a
-            href="https://instagram.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ color: '#f4f3ee', margin: '0 10px', fontSize: '20px' }}
-            aria-label="Instagram"
-          >
-            <i className="bi bi-instagram"></i>
-          </a>
-          <a
-            href="https://linkedin.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ color: '#f4f3ee', margin: '0 10px', fontSize: '20px' }}
-            aria-label="LinkedIn"
-          >
-            <i className="bi bi-linkedin"></i>
-          </a>
+          {["facebook", "twitter", "instagram", "linkedin"].map((network) => (
+            <a
+              key={network}
+              href={`https://${network}.com`}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: '#f4f3ee', margin: '0 10px', fontSize: '20px', transition: 'color 0.3s' }}
+              aria-label={network.charAt(0).toUpperCase() + network.slice(1)}
+              onMouseEnter={e => e.currentTarget.style.color = '#a8c0ff'}
+              onMouseLeave={e => e.currentTarget.style.color = '#f4f3ee'}
+            >
+              <i className={`bi bi-${network}`}></i>
+            </a>
+          ))}
         </div>
       </div>
     </footer>

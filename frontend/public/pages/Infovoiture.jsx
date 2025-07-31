@@ -15,15 +15,15 @@ function Infovoiture({ user }) {
   }, [id]);
 
   return (
-    <div className="container mt-4" style={{ backgroundColor: '#bcb8b1', minHeight: '100vh', padding: '20px' }}>
+    <div className="container mt-4" style={{ minHeight: '100vh', padding: '20px' }}>
       <h1 className="text-center mb-4">Détails de la voiture</h1>
 
       {voiture && (
         <div
           className="card shadow"
           style={{
-            backgroundColor: '#8a817c',
-            color: '#f4f3ee',
+            backgroundColor: '#3b4a6b',   
+            color: '#f4f3ee',             
             border: 'none',
             borderRadius: '10px',
             overflow: 'hidden'
@@ -35,11 +35,15 @@ function Infovoiture({ user }) {
               src={`http://localhost:3000/uploads/${voiture.img}`}
               alt="voiture"
               className="card-img-top"
-              style={{ maxHeight: "300px", objectFit: "cover" }}
+              style={{
+                maxHeight: "300px",
+                objectFit: "cover",
+                borderBottom: '1px solid #726f6a'  
+              }}
             />
           )}
 
-          <div className="card-header border-0" style={{ backgroundColor: '#726f6a', color: '#fff' }}>
+          <div className="card-header border-0 text-center" style={{ backgroundColor: '#d9e6f2', color: 'black' }}>
             Matricule : <strong>{voiture.matricul}</strong>
           </div>
 
@@ -49,7 +53,7 @@ function Infovoiture({ user }) {
             <p>Prix : <strong>{voiture.prix} Dh</strong></p>
           </div>
 
-          <div className="card-footer border-0 d-flex justify-content-between" style={{ backgroundColor: '#726f6a' }}>
+          <div className="card-footer border-0 d-flex justify-content-between" style={{ backgroundColor: '#3b4a6b' }}>
             <button className="btn btn-light text-dark w-50 me-2" onClick={() => setShowModal(true)}>
               Réserver cette voiture
             </button>
@@ -58,9 +62,10 @@ function Infovoiture({ user }) {
             </NavLink>
           </div>
         </div>
+
       )}
 
-      
+
       <Formreserve
         show={showModal}
         onClose={() => setShowModal(false)}

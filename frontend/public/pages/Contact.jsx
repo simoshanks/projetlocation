@@ -21,7 +21,7 @@ function Contact() {
   };
 
   return (
-    <div style={{ backgroundColor: '#bcb8b1', minHeight: '100vh', paddingTop: '50px' }}>
+    <div style={{  minHeight: '100vh', paddingTop: '50px' }}>
       <div className="container py-5">
         <h1
           className="text-center mb-5"
@@ -83,7 +83,7 @@ function Contact() {
             ></textarea>
           </div>
 
-          <button type="submit" className="btn btn-dark w-100">
+          <button type="submit" className="btn  w-100" style={{background:'#3b4a6b',color:'white'}}>
             Envoyer
           </button>
         </form>

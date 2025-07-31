@@ -71,7 +71,7 @@ function Login({ setUser }) {
                         required />
                 </div>
 
-                <button type="submit" className="btn btn-primary" disabled={loading}>
+                <button type="submit" className="btn" style={{background:'#3b4a6b',color:'white'}} disabled={loading}>
                     {loading ? "Connexion..." : "Se connecter"}
                 </button>
             </form>

@@ -17,10 +17,7 @@ function Navbar() {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg " style={{
-      backgroundColor: '#8a817c',
-      color: '#f4f3ee'
-    }}>
+    <nav className="navbar navbar-expand-lg ">
       <div className="container-fluid">
         <NavLink className="navbar-brand" to="/accueil">Azicare</NavLink>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -33,7 +30,7 @@ function Navbar() {
               <NavLink className="nav-link" to="/accueil">Accueil</NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/voitures">Voitures</NavLink>
+              <NavLink className="nav-link" to="/voiture">Voitures</NavLink>
             </li>
             <li className="nav-item">
               <NavLink className="nav-link" to="/contact">Contactez-nous</NavLink>
