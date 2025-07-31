@@ -12,7 +12,7 @@ function Login({ setUser }) {
     function handleLogin(e) {
         e.preventDefault();
 
-        // تحقق من ملء الحقول
+        
         if (!email || !password) {
             setMessage("Veuillez remplir tous les champs.");
             return;
@@ -23,15 +23,15 @@ function Login({ setUser }) {
             .then(res => {
                 const user = res.data;
 
-                // حفظ المستخدم
+                
                 localStorage.setItem("user", JSON.stringify(user));
-                setUser(user); // تحديث الحالة
+                setUser(user); 
 
-                // التوجيه حسب الدور
+                
                 if (user.role === 'admin') {
                     navigate('/admin');
                 } else {
-                    navigate('/voitures');
+                    navigate('/voiture');
                 }
                
                 window.location.reload();

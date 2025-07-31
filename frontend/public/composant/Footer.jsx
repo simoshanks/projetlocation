@@ -2,7 +2,7 @@ function Footer() {
   return (
     <footer
       style={{
-        background: 'linear-gradient(90deg, #3b4a6b, #556787)', // أزرق غامق متدرج
+        background: 'linear-gradient(90deg, #3b4a6b, #556787)', 
         color: '#f4f3ee',
         fontSize: '14px',
       }}

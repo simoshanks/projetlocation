@@ -30,6 +30,11 @@ function Tablevoiture() {
         <div>
 
             <div className="container">
+                <div className="d-flex justify-content-end mb-3">
+                    <NavLink to="/nouvel-voiture" className="btn btn" style={{background:'#3b4a6b ',color:'white'}}>
+                        ➕ Ajouter une voiture
+                    </NavLink>
+                </div>
                 <h2 className="text-center mb-4" style={{ color: '#4e4e4e', fontWeight: 'bold' }}>
                     List des voitures
                 </h2>

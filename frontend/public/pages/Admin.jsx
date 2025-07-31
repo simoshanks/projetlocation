@@ -45,7 +45,7 @@ function Admin() {
             borderRadius: "4px",
           }}
         >
-          {sidebarOpen ? "X" : "Meun"}
+          {sidebarOpen ? "❌" : "Meun"}
         </button>
 
         

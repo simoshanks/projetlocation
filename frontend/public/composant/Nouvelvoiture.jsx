@@ -11,7 +11,7 @@ function Nouvelvoiture() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  // تنظيف URL المعاينة عند تغيير الصورة
+  
   useEffect(() => {
     return () => {
       if (imageFile) {
@@ -27,7 +27,7 @@ function Nouvelvoiture() {
     formData.append("matricul", matricul);
     formData.append("marque", marque);
     formData.append("prix", prix);
-    formData.append("image", imageFile); // الاسم يجب أن يطابق اسم الحقل في multer
+    formData.append("image", imageFile); 
 
     try {
       await axios.post("http://localhost:3000/voiture/upload", formData, {
@@ -44,7 +44,7 @@ function Nouvelvoiture() {
       setTimeout(() => navigate("/admin"), 2000);
     } catch (err) {
       console.error(err);
-      setError("❌ Erreur lors de l'ajout de la voiture.");
+      setError(" Erreur lors de l'ajout de la voiture.");
     }
   };
 

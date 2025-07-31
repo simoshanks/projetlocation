@@ -19,7 +19,7 @@ function Tablemessages() {
       axios.delete(`http://localhost:3000/messages/${id}`)
         .then(() => {
           alert("Message supprimé avec succès.");
-          fetchMessages(); // إعادة تحميل القائمة
+          fetchMessages(); 
         })
         .catch(err => {
           console.error("Erreur lors de la suppression :", err);

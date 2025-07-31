@@ -14,7 +14,7 @@ function Contact() {
     try {
       const res = await axios.post('http://localhost:3000/messages', formData);
       setStatus({ success: res.data.message });
-      setFormData({ name: '', email: '', message: '' }); // إعادة تعيين النموذج
+      setFormData({ name: '', email: '', message: '' }); 
     } catch (error) {
       setStatus({ error: error.response?.data?.error || 'خطأ في الإرسال' });
     }

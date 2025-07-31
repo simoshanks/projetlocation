@@ -15,11 +15,11 @@ function Tablereservation() {
             .catch(err => console.log(err));
     };
 
-    // دالة لتحديث حالة الحجز
+    
     const updateStatut = (id, newStatut) => {
         axios.put(`http://localhost:3000/reservation/${id}`, { statut: newStatut })
             .then(() => {
-                fetchReservations(); // إعادة تحميل القائمة بعد التحديث
+                fetchReservations(); 
             })
             .catch(err => console.error("Erreur lors de la mise à jour du statut :", err));
     };

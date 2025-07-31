@@ -7,7 +7,7 @@ function Inforeserv() {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        // جلب المستخدم المسجل من localStorage
+        
         const user = JSON.parse(localStorage.getItem("user"));
 
         if (user && user.id) {
